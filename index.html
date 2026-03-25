@@ -61,16 +61,15 @@
 
       <!-- Creator Info -->
       
-      <div class="inline-flex items-center gap-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-3xl px-7 py-4 mb-12">
-        <img src="file:///C:/Users/NEC/OneDrive/Desktop/IMG_20251228_163203_661.jpg" 
-             alt="Lance Macatol" 
-             class="w-14 h-14 rounded-2xl object-cover border-2 border-white/40 shadow-lg">
-        
-        <div class="text-left">
-          <p class="font-medium text-white">Created by Lance Macatol</p>
-          <p class="text-sm text-emerald-300"> Aspiring Startup Founder</p>
-          <p class="text-xs text-zinc-400 mt-1">📧 neferkon@email.com </p>
-        </div>
+           <!-- Subtle Hoverable Author Info -->
+      <div class="mb-12">
+        <p class="text-zinc-400 text-sm">
+          Made by 
+          <span onclick="showAuthorInfo()" 
+                class="text-emerald-400 hover:text-emerald-300 cursor-pointer underline decoration-dotted underline-offset-4 transition">
+            Lance Macatol
+          </span>
+        </p>
       </div>
 
       <!-- Buttons -->
@@ -154,6 +153,41 @@
   </div>
 
 <script>
+
+  //author 
+  
+  function showAuthorInfo() {
+  const infoHTML = `
+    <div id="author-modal" class="fixed inset-0 bg-black/70 flex items-center justify-center z-[100]">
+      <div class="bg-zinc-900 rounded-3xl p-8 max-w-sm w-full mx-4 border border-zinc-700">
+        <div class="flex items-center gap-4 mb-6">
+          <img src="https://i.imgur.com/YOUR_LINK_HERE.jpg" 
+               alt="Jin Zhao" 
+               class="w-16 h-16 rounded-2xl object-cover border-2 border-white/30">
+          <div>
+            <h3 class="text-xl font-semibold text-white">Jin Zhao</h3>
+            <p class="text-emerald-400">STEM Student &amp; Aspiring Startup Founder</p>
+          </div>
+        </div>
+        <p class="text-zinc-300 text-sm leading-relaxed mb-6">
+          Built ASLAB to help teachers save time and create better assessments using real data instead of guesswork.
+        </p>
+        <div class="flex gap-3">
+          <button onclick="closeAuthorInfo()" 
+                  class="flex-1 bg-white text-zinc-900 py-3 rounded-2xl font-medium hover:bg-zinc-100">
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  `;
+  document.body.insertAdjacentHTML('beforeend', infoHTML);
+}
+
+function closeAuthorInfo() {
+  const modal = document.getElementById('author-modal');
+  if (modal) modal.remove();
+}
 // ====================== Core Functions ======================
 let isDark = true;
 
