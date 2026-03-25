@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ASLAB</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: "Segoe UI", sans-serif;
+    }
+
+    body {
+      margin: 0;
+      background: #f4f6f9;
+      color: #333;
+    }
+
+    header {
+      background: #1e293b;
+      color: white;
+      padding: 15px 30px;
+      font-size: 20px;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    textarea {
+      width: 100%;
+      height: 120px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      padding: 10px;
+      font-size: 14px;
+    }
+
+    button {
+      margin-top: 10px;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 8px;
+      background: #2563eb;
+      color: white;
+      font-size: 14px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    h2 {
+      margin-top: 0;
+    }
+
+    .subject-title {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    th {
+      background: #f1f5f9;
+    }
+
+    th, td {
+      padding: 10px;
+      border-bottom: 1px solid #eee;
+      text-align: center;
+    }
+
+    tr:hover {
+      background: #f9fafb;
+    }
+
+    .keep {
+      color: #16a34a;
+      font-weight: bold;
+    }
+
+    .revise {
+      color: #ca8a04;
+      font-weight: bold;
+    }
+
+    .remove {
+      color: #dc2626;
+      font-weight: bold;
+    }
+
+    .insights {
+      margin-top: 15px;
+      padding: 10px;
+      background: #f8fafc;
+      border-left: 4px solid #2563eb;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  ASLAB — Assessment Lab
+</header>
+
+<div class="container">
+
+  <div class="card">
+    <h2>Upload Dataset</h2>
+    <p>Format: StudentID, Subject, Q1, Q2, Q3...</p>
+
+    <textarea id="data">
+Student1,Math,A,B,C,D,A
+Student1,Science,B,B,C,D,A
+Student2,Math,A,B,D,D,A
+Student2,Science,B,C,C,D,A
+Student3,Math,A,B,C,D,B
+Student3,Science,B,B,C,D,A
+    </textarea>
+
+    <button onclick="analyze()">Analyze All Subjects</button>
+  </div>
+
+  <div id="output"></div>
+
+</div>
+
+<script>
+function analyze() {
+  let raw = document.getElementById("data").value.trim().split("\n");
+
+  let dataset = raw.map(row => row.split(","));
+  let grouped = {};
+
+  dataset.forEach(row => {
+    let subject = row[1];
+    let answers = row.slice(2);
+
+    if (!grouped[subject]) grouped[subject] = [];
+    grouped[subject].push(answers);
+  });
+
+  let outputHTML = "";
+
+  for (let subject in grouped) {
+    let students = grouped[subject];
+    let totalStudents = students.length;
+    let numQuestions = students[0].length;
+
+    let key = [];
+
+    for (let i = 0; i < numQuestions; i++) {
+      let freq = {};
+      students.forEach(s => {
+        freq[s[i]] = (freq[s[i]] || 0) + 1;
+      });
+      key[i] = Object.keys(freq).reduce((a, b) => freq[a] > freq[b] ? a : b);
+    }
+
+    let scores = students.map(s =>
+      s.reduce((acc, ans, i) => acc + (ans === key[i] ? 1 : 0), 0)
+    );
+
+    let sorted = students.map((s, i) => ({s, score: scores[i]}))
+                         .sort((a,b) => b.score - a.score);
+
+    let groupSize = Math.max(1, Math.floor(totalStudents * 0.27));
+    let top = sorted.slice(0, groupSize);
+    let bottom = sorted.slice(-groupSize);
+
+    let insights = [];
+    let table = `<div class="card">
+    <div class="subject-title">${subject}</div>
+    <table>
+    <tr><th>Q#</th><th>Difficulty</th><th>Discrimination</th><th>Action</th></tr>`;
+
+    for (let i = 0; i < numQuestions; i++) {
+      let correct = students.filter(s => s[i] === key[i]).length;
+      let difficulty = correct / totalStudents;
+
+      let topCorrect = top.filter(s => s.s[i] === key[i]).length;
+      let bottomCorrect = bottom.filter(s => s.s[i] === key[i]).length;
+
+      let d = (topCorrect - bottomCorrect) / groupSize;
+
+      let action = "";
+      let className = "";
+
+      if (d < 0) {
+        action = "REMOVE";
+        className = "remove";
+        insights.push(`Q${i+1}: Negative discrimination.`);
+      } else if (d < 0.2) {
+        action = "REVISE";
+        className = "revise";
+      } else {
+        action = "KEEP";
+        className = "keep";
+      }
+
+      if (difficulty > 0.85) insights.push(`Q${i+1}: Too easy.`);
+      if (difficulty < 0.2) insights.push(`Q${i+1}: Too difficult.`);
+
+      table += `<tr>
+        <td>${i+1}</td>
+        <td>${difficulty.toFixed(2)}</td>
+        <td>${d.toFixed(2)}</td>
+        <td class="${className}">${action}</td>
+      </tr>`;
+    }
+
+    table += `</table>`;
+
+    if (insights.length > 0) {
+      table += `<div class="insights">
+        <b>Insights:</b><br>• ${insights.join("<br>• ")}
+      </div>`;
+    }
+
+    table += `</div>`;
+
+    outputHTML += table;
+  }
+
+  document.getElementById("output").innerHTML = outputHTML;
+}
+</script>
+
+</body>
+</html>
