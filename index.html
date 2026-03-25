@@ -68,7 +68,7 @@
         
         <div class="text-left">
           <p class="font-medium text-white">Created by Lance Macatol</p>
-          <p class="text-sm text-emerald-300">STEM Student &amp; Aspiring Startup Founder</p>
+          <p class="text-sm text-emerald-300"> Aspiring Startup Founder</p>
           <p class="text-xs text-zinc-400 mt-1">📧 neferkon@email.com </p>
         </div>
       </div>
@@ -214,10 +214,10 @@ function showPrototypeNote() {
         <div class="flex-1">
           <h4 class="font-semibold text-lg mb-1 text-amber-400">Prototype Note</h4>
           <p class="text-zinc-300 text-[15px] leading-relaxed">
-            This is an early prototype built by a STEM student.<br><br>
+            This is an early prototype built with 100% HTML by One Man.<br><br>
             • Uses most frequent answer as the correct key<br>
             • Designed for multiple-choice questions only<br>
-            • Works best with 8–30 students per subject<br>
+            • Only works best with 8–30 students per subject yet<br>
             • Answer key upload &amp; more features coming soon
           </p>
           <div class="mt-5">
@@ -226,7 +226,7 @@ function showPrototypeNote() {
               Got it, thanks!
             </button>
           </div>
-          <p class="text-center text-zinc-500 text-xs mt-4">This note will auto-dismiss in 8 seconds</p>
+          <p class="text-center text-zinc-500 text-xs mt-4">This note will auto-dismiss in 30 seconds</p>
         </div>
       </div>
     </div>
@@ -234,8 +234,8 @@ function showPrototypeNote() {
 
   document.body.insertAdjacentHTML('beforeend', noteHTML);
 
-  // Auto dismiss after 8 seconds
-  setTimeout(dismissPrototypeNote, 8000);
+  // Auto dismiss after 30 seconds
+  setTimeout(dismissPrototypeNote, 30000);
 }
 
 function dismissPrototypeNote() {
