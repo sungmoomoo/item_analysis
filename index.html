@@ -9,7 +9,6 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-    
     body { font-family: 'Inter', system_ui, sans-serif; }
     .hero-bg {
       background: linear-gradient(135deg, #1e2937 0%, #0f172a 100%);
@@ -55,46 +54,36 @@
       </h2>
 
       <p class="text-xl text-zinc-400 max-w-lg mx-auto mb-10">
-        Teachers item analysis tool with difficulty, discrimination, 
-        distractor insights &amp; actionable recommendations.
+        Simple tool that helps teachers understand which questions are working well and which need improvement — without complicated scanning or special sheets.
       </p>
 
-      <!-- Creator Info -->
-    
+      <!-- Author -->
       <div class="mb-12">
         <p class="text-zinc-400 text-sm">
           Made by 
-          <span onclick="showAuthorInfo()" 
-                class="text-emerald-400 hover:text-emerald-300 cursor-pointer underline decoration-dotted underline-offset-4 transition">
-            Lance Macatol
+          <span onclick="showAuthorInfo()" class="text-emerald-400 hover:text-emerald-300 cursor-pointer underline decoration-dotted underline-offset-4 transition">
+            Jin Zhao
           </span>
         </p>
       </div>
 
-      <!-- Buttons -->
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <button onclick="startApp()" 
-                class="group px-12 py-6 bg-white text-zinc-900 rounded-3xl font-semibold text-xl flex items-center justify-center gap-3 hover:scale-105 active:scale-95 transition-all duration-300 shadow-xl">
+        <button onclick="startApp()" class="group px-12 py-6 bg-white text-zinc-900 rounded-3xl font-semibold text-xl flex items-center justify-center gap-3 hover:scale-105 active:scale-95 transition-all duration-300 shadow-xl">
           Get Started
           <i class="fa-solid fa-arrow-right group-active:translate-x-1 transition"></i>
         </button>
 
-        <button onclick="loadSampleAndStart()" 
-                class="px-10 py-6 border border-zinc-600 hover:border-zinc-400 rounded-3xl font-medium text-xl flex items-center gap-3 transition">
+        <button onclick="loadSampleAndStart()" class="px-10 py-6 border border-zinc-600 hover:border-zinc-400 rounded-3xl font-medium text-xl flex items-center gap-3 transition">
           <i class="fa-solid fa-file-chart-column"></i>
           Try Sample Data
         </button>
       </div>
 
       <div class="mt-16 flex justify-center gap-10 text-sm text-zinc-500">
-        <div class="flex items-center gap-2"><i class="fa-solid fa-check"></i> Free &amp; Offline</div>
-        <div class="flex items-center gap-2"><i class="fa-solid fa-check"></i> Built by a Student</div>
-        <div class="flex items-center gap-2"><i class="fa-solid fa-check"></i> For Real Classrooms</div>
+        <div class="flex items-center gap-2"><i class="fa-solid fa-check"></i> Free & Offline</div>
+        <div class="flex items-center gap-2"><i class="fa-solid fa-check"></i> No special sheets needed</div>
+        <div class="flex items-center gap-2"><i class="fa-solid fa-check"></i> Built for teachers</div>
       </div>
-    </div>
-
-    <div class="absolute bottom-10 text-zinc-500 text-sm">
-      Made by a student-entrepreneur
     </div>
   </div>
 
@@ -108,11 +97,9 @@
           <p class="text-xs text-zinc-400 -mt-1">Assessment Lab</p>
         </div>
       </div>
-      
       <div class="flex items-center gap-6">
         <button onclick="showWelcome()" class="flex items-center gap-2 px-5 py-2 hover:bg-zinc-800 rounded-2xl transition">
-          <i class="fa-solid fa-home"></i>
-          <span class="hidden sm:inline">Home</span>
+          <i class="fa-solid fa-home"></i><span class="hidden sm:inline">Home</span>
         </button>
         <button onclick="toggleTheme()" class="p-3 rounded-2xl hover:bg-zinc-800 transition">
           <i id="theme-icon" class="fa-solid fa-moon text-xl"></i>
@@ -122,12 +109,12 @@
 
     <div class="max-w-7xl mx-auto p-6">
       <div class="card bg-white dark:bg-zinc-900 rounded-3xl shadow-xl p-10 mb-10">
-        <h2 class="text-3xl font-semibold mb-2">Upload Student Responses</h2>
-        <p class="text-zinc-500 dark:text-zinc-400 mb-8">Format: <code class="bg-zinc-100 dark:bg-zinc-800 px-2 py-1 rounded">StudentID,Subject,Q1,Q2,Q3,...</code></p>
+        <h2 class="text-3xl font-semibold mb-2">Upload or Paste Student Answers</h2>
+        <p class="text-zinc-500 dark:text-zinc-400 mb-8">Supports Google Forms export or simple table format</p>
 
         <div id="dropzone" class="border-2 border-dashed border-zinc-300 dark:border-zinc-700 rounded-3xl p-16 text-center cursor-pointer hover:border-blue-500 transition-all">
           <i class="fa-solid fa-cloud-arrow-up text-6xl text-zinc-400 mb-6"></i>
-          <p class="text-2xl font-medium mb-2">Drag &amp; drop your CSV file</p>
+          <p class="text-2xl font-medium mb-2">Drag & drop CSV file</p>
           <p class="text-zinc-500">or click to browse</p>
           <label class="mt-6 inline-block px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-2xl cursor-pointer font-medium">
             Browse File
@@ -138,12 +125,11 @@
         <div class="my-8 text-center text-zinc-400">— or paste data below —</div>
 
         <textarea id="data" rows="7" class="w-full p-6 border border-zinc-300 dark:border-zinc-700 rounded-3xl font-mono text-sm bg-white dark:bg-zinc-950 focus:outline-none focus:border-blue-500"
-                  placeholder="Student1,Math,A,B,C,D,A&#10;Student1,Science,B,B,C,D,A&#10;..."></textarea>
+                  placeholder="Student1,Math,A,B,C,D,A&#10;Student2,Math,A,B,C,D,A&#10;..."></textarea>
 
-        <button onclick="analyze()" 
-                class="mt-8 w-full bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 py-6 rounded-3xl font-semibold text-xl flex items-center justify-center gap-3 shadow-lg">
+        <button onclick="analyze()" class="mt-8 w-full bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 py-6 rounded-3xl font-semibold text-xl flex items-center justify-center gap-3 shadow-lg">
           <i class="fa-solid fa-chart-bar"></i>
-          Analyze All Subjects
+          Analyze Test
         </button>
       </div>
 
@@ -152,33 +138,24 @@
   </div>
 
 <script>
-
-  //author modal logic -css -js
-  
-  function showAuthorInfo() {
+// ====================== Author Modal ======================
+function showAuthorInfo() {
   const infoHTML = `
     <div id="author-modal" class="fixed inset-0 bg-black/70 flex items-center justify-center z-[100]">
       <div class="bg-zinc-900 rounded-3xl p-8 max-w-sm w-full mx-4 border border-zinc-700">
         <div class="flex items-center gap-4 mb-6">
-             <img src="//" 
-               alt="Lance Macatol"
-               class="w-16 h-16 rounded-2xl object-cover border-2 border-white/30">
+          <div class="w-16 h-16 bg-gradient-to-br from-emerald-400 to-teal-500 rounded-2xl flex items-center justify-center text-3xl">👨‍💻</div>
           <div>
-            <h3 class="text-xl font-semibold text-white">Lance Macatol</h3>
-            <p class="text-emerald-400">Aspiring Startup Founder</p>
+            <h3 class="text-xl font-semibold text-white">Jin Zhao</h3>
+            <p class="text-emerald-400">STEM Student & Aspiring Startup Founder</p>
           </div>
         </div>
         <p class="text-zinc-300 text-sm leading-relaxed mb-6">
-          Built ASLAB to help teachers save time and create better assessments using real data.
-          📧 neferkon@gmail.com 
-    
+          Built ASLAB to help teachers understand their test quality faster and easier.
         </p>
-        <div class="flex gap-3">
-          <button onclick="closeAuthorInfo()" 
-                  class="flex-1 bg-white text-zinc-900 py-3 rounded-2xl font-medium hover:bg-zinc-100">
-            Close
-          </button>
-        </div>
+        <button onclick="closeAuthorInfo()" class="w-full bg-white text-zinc-900 py-3 rounded-2xl font-medium hover:bg-zinc-100">
+          Close
+        </button>
       </div>
     </div>
   `;
@@ -189,6 +166,7 @@ function closeAuthorInfo() {
   const modal = document.getElementById('author-modal');
   if (modal) modal.remove();
 }
+
 // ====================== Core Functions ======================
 let isDark = true;
 
@@ -203,7 +181,6 @@ function toggleTheme() {
 function startApp() {
   document.getElementById('welcome-screen').classList.add('hidden');
   document.getElementById('main-app').classList.remove('hidden');
-  setTimeout(showPrototypeNote, 3000);   // Show note after 3 seconds
 }
 
 function showWelcome() {
@@ -221,278 +198,19 @@ Student3,Science,B,B,C,D,A
 Student4,Math,B,A,C,D,A
 Student4,Science,A,B,C,D,A
 Student5,Math,A,B,C,D,A
-Student5,Science,B,B,C,D,A
-Student6,Math,A,B,C,D,A
-Student6,Science,B,A,C,D,A
-Student7,Math,A,B,C,D,A
-Student7,Science,B,B,C,D,A
-Student8,Math,C,B,C,D,A
-Student8,Science,B,B,C,D,A
-Student9,Math,A,B,C,D,A
-Student9,Science,B,B,C,D,A
-Student10,Math,A,B,C,D,A
-Student10,Science,B,B,C,D,A`;
-
-  document.getElementById('welcome-screen').classList.add('hidden');
-  document.getElementById('main-app').classList.remove('hidden');
-  setTimeout(showPrototypeNote, 30000);   // Show note after 30 seconds
+Student5,Science,B,B,C,D,A`;
+  startApp();
+  setTimeout(analyze, 300);
 }
 
-// Prototype Note
-function showPrototypeNote() {
-  if (document.getElementById('prototype-note')) return;
-
-  const noteHTML = `
-    <div id="prototype-note" class="fixed bottom-6 right-6 max-w-md bg-zinc-900 border border-zinc-700 rounded-3xl shadow-2xl p-6 z-50 fade-in">
-      <div class="flex items-start gap-4">
-        <div class="w-10 h-10 bg-amber-500/10 rounded-2xl flex items-center justify-center text-2xl flex-shrink-0">⚠️</div>
-        <div class="flex-1">
-          <h4 class="font-semibold text-lg mb-1 text-amber-400">Prototype Note</h4>
-          <p class="text-zinc-300 text-[15px] leading-relaxed">
-            This is an early prototype built by one man.<br><br>
-            • Uses most frequent answer as the correct key<br>
-            • Designed for multiple-choice questions only<br>
-            • Only works best with 8–30 students per subject yet<br>
-            • Answer key upload &amp; more features coming soon
-          </p>
-          <div class="mt-5">
-            <button onclick="dismissPrototypeNote()" 
-                    class="w-full bg-white text-zinc-900 py-3 rounded-2xl font-semibold hover:bg-zinc-100 transition">
-              Got it, thanks!
-            </button>
-          </div>
-          <p class="text-center text-zinc-500 text-xs mt-4">This note will auto-dismiss in 30 seconds</p>
-        </div>
-      </div>
-    </div>
-  `;
-
-  document.body.insertAdjacentHTML('beforeend', noteHTML);
-
-  // Auto dismiss after 30 seconds
-  setTimeout(dismissPrototypeNote, 30000);
-}
-
-function dismissPrototypeNote() {
-  const note = document.getElementById('prototype-note');
-  if (note) {
-    note.style.transition = 'all 0.4s ease';
-    note.style.opacity = '0';
-    note.style.transform = 'translateY(20px)';
-    setTimeout(() => note.remove(), 400);
-  }
-}
-
-// File Handling
-function handleFile(e) {
-  const file = e.target.files ? e.target.files[0] : e.dataTransfer.files[0];
-  if (!file) return;
-  
-  const reader = new FileReader();
-  reader.onload = ev => {
-    document.getElementById('data').value = ev.target.result;
-    startApp();
-    setTimeout(analyze, 100);
-  };
-  reader.readAsText(file);
-}
-
-// Drag & Drop
+// File handling and drag & drop (kept same as before)
 const dropzone = document.getElementById('dropzone');
-dropzone.addEventListener('dragover', e => {
-  e.preventDefault();
-  dropzone.classList.add('border-blue-500', 'bg-blue-50', 'dark:bg-blue-950/30');
-});
-dropzone.addEventListener('dragleave', () => {
-  dropzone.classList.remove('border-blue-500', 'bg-blue-50', 'dark:bg-blue-950/30');
-});
+dropzone.addEventListener('dragover', e => { e.preventDefault(); dropzone.classList.add('border-blue-500'); });
+dropzone.addEventListener('dragleave', () => dropzone.classList.remove('border-blue-500'));
 dropzone.addEventListener('drop', e => {
   e.preventDefault();
-  dropzone.classList.remove('border-blue-500', 'bg-blue-50', 'dark:bg-blue-950/30');
-  handleFile(e);
-});
-document.getElementById('fileInput').addEventListener('change', handleFile);
-
-// ====================== Main Analysis ======================
-function analyze() {
-  const raw = document.getElementById('data').value.trim();
-  if (!raw) {
-    alert("Please paste data or upload a CSV file.");
-    return;
-  }
-
-  const rows = raw.split('\n').map(r => r.split(',').map(c => c.trim()));
-  const grouped = {};
-
-  rows.forEach(row => {
-    if (row.length < 3) return;
-    const subject = row[1];
-    const answers = row.slice(2);
-    if (!grouped[subject]) grouped[subject] = [];
-    grouped[subject].push({id: row[0], answers});
-  });
-
-  let html = `<h2 class="text-4xl font-bold mb-10 flex items-center gap-4"><i class="fa-solid fa-chart-pie text-blue-500"></i> Analysis Results</h2>`;
-
-  Object.keys(grouped).forEach(subject => {
-    const students = grouped[subject];
-    const n = students.length;
-    if (n < 5) {
-      html += `<div class="p-8 bg-amber-100 dark:bg-amber-950 rounded-3xl text-center">Not enough students for reliable analysis in <strong>${subject}</strong> (need at least 5).</div>`;
-      return;
-    }
-
-    const numQ = students[0].answers.length;
-    const key = [];
-    for (let q = 0; q < numQ; q++) {
-      const freq = {};
-      students.forEach(s => {
-        const ans = s.answers[q];
-        freq[ans] = (freq[ans] || 0) + 1;
-      });
-      key[q] = Object.keys(freq).reduce((a, b) => freq[a] > freq[b] ? a : b);
-    }
-
-    const scores = students.map(s => 
-      s.answers.reduce((acc, ans, i) => acc + (ans === key[i] ? 1 : 0), 0)
-    );
-
-    const meanScore = (scores.reduce((a,b) => a+b, 0) / n).toFixed(2);
-    const sortedStudents = students.map((s,i) => ({...s, score: scores[i]}))
-                                   .sort((a,b) => b.score - a.score);
-
-    const groupSize = Math.max(1, Math.floor(n * 0.27));
-    const upper = sortedStudents.slice(0, groupSize);
-    const lower = sortedStudents.slice(-groupSize);
-
-    const scoreCounts = {};
-    scores.forEach(sc => scoreCounts[sc] = (scoreCounts[sc] || 0) + 1);
-
-    let tableHTML = `
-      <div class="card bg-white dark:bg-zinc-900 rounded-3xl shadow-xl p-8">
-        <div class="flex justify-between items-start mb-8">
-          <div>
-            <div class="uppercase text-blue-600 dark:text-blue-400 text-sm tracking-widest font-medium">${subject}</div>
-            <h3 class="text-3xl font-bold">${n} Students • ${numQ} Questions</h3>
-          </div>
-          <div class="text-right">
-            <div class="text-5xl font-bold text-emerald-600">${meanScore}</div>
-            <div class="text-sm text-zinc-500">Average Score / ${numQ}</div>
-          </div>
-        </div>
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          <div>
-            <h4 class="font-semibold mb-4">Score Distribution</h4>
-            <canvas id="chart-${subject.replace(/\s+/g,'')}" height="180"></canvas>
-          </div>
-          <div class="lg:col-span-2">
-            <table class="w-full">
-              <thead>
-                <tr class="border-b dark:border-zinc-700">
-                  <th class="py-4 text-left font-medium">Question</th>
-                  <th class="py-4 text-center">Difficulty</th>
-                  <th class="py-4 text-center">Discrimination</th>
-                  <th class="py-4 text-center">Action</th>
-                  <th class="py-4 text-left">Distractors</th>
-                </tr>
-              </thead>
-              <tbody>`;
-
-    let insights = [];
-
-    for (let q = 0; q < numQ; q++) {
-      const correctAns = key[q];
-      let correctTotal = 0, topCorrect = 0, bottomCorrect = 0;
-      const distractorFreq = {};
-
-      students.forEach(s => {
-        const ans = s.answers[q];
-        if (!distractorFreq[ans]) distractorFreq[ans] = {total:0, upper:0, lower:0};
-        distractorFreq[ans].total++;
-        if (ans === correctAns) correctTotal++;
-      });
-
-      upper.forEach(s => {
-        const ans = s.answers[q];
-        if (ans === correctAns) topCorrect++;
-        if (distractorFreq[ans]) distractorFreq[ans].upper++;
-      });
-      lower.forEach(s => {
-        const ans = s.answers[q];
-        if (ans === correctAns) bottomCorrect++;
-        if (distractorFreq[ans]) distractorFreq[ans].lower++;
-      });
-
-      const difficulty = correctTotal / n;
-      const discrimination = groupSize ? ((topCorrect - bottomCorrect) / groupSize) : 0;
-
-      let action = "KEEP";
-      let actionClass = "bg-emerald-100 text-emerald-700 dark:bg-emerald-900 dark:text-emerald-300";
-
-      if (discrimination < 0) {
-        action = "REMOVE";
-        actionClass = "bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-300";
-        insights.push(`Q${q+1}: Negative discrimination — review or remove item.`);
-      } else if (discrimination < 0.20) {
-        action = "REVISE";
-        actionClass = "bg-amber-100 text-amber-700 dark:bg-amber-900 dark:text-amber-300";
-      }
-
-      if (difficulty > 0.85) insights.push(`Q${q+1}: Too easy (${(difficulty*100).toFixed(0)}%)`);
-      if (difficulty < 0.25) insights.push(`Q${q+1}: Too difficult (${(difficulty*100).toFixed(0)}%)`);
-
-      let distrHTML = '';
-      Object.keys(distractorFreq).forEach(opt => {
-        if (opt === correctAns) return;
-        const f = distractorFreq[opt];
-        const uPct = groupSize ? (f.upper / groupSize * 100).toFixed(0) : 0;
-        distrHTML += `<span class="inline-block px-3 py-1 text-xs rounded-full mr-1 ${uPct > 30 ? 'bg-rose-100 text-rose-700' : 'bg-zinc-100 dark:bg-zinc-800'}">${opt} <span class="text-[10px]">(${uPct}%↑)</span></span>`;
-      });
-
-      tableHTML += `
-        <tr class="border-b dark:border-zinc-700 hover:bg-zinc-50 dark:hover:bg-zinc-800">
-          <td class="py-5 font-medium">Q${q+1}</td>
-          <td class="text-center font-mono">${difficulty.toFixed(2)}</td>
-          <td class="text-center font-semibold ${discrimination >= 0.3 ? 'text-emerald-600' : discrimination >= 0.2 ? 'text-amber-600' : 'text-red-600'}">${discrimination.toFixed(2)}</td>
-          <td class="text-center"><span class="px-5 py-1 rounded-full text-xs font-semibold ${actionClass}">${action}</span></td>
-          <td class="text-xs">${distrHTML || '—'}</td>
-        </tr>`;
-    }
-
-    tableHTML += `</tbody></table></div></div>`;
-
-    if (insights.length > 0) {
-      tableHTML += `
-        <div class="mt-6 p-6 bg-amber-50 dark:bg-amber-950 border-l-4 border-amber-500 rounded-2xl">
-          <h5 class="font-semibold mb-3 flex items-center gap-2"><i class="fa-solid fa-lightbulb"></i> Insights & Recommendations</h5>
-          <ul class="space-y-1 text-sm">${insights.map(i => `<li>• ${i}</li>`).join('')}</ul>
-        </div>`;
-    }
-
-    tableHTML += `</div>`;
-    html += tableHTML;
-
-    setTimeout(() => {
-      const canvas = document.getElementById(`chart-${subject.replace(/\s+/g,'')}`);
-      if (canvas) {
-        new Chart(canvas, {
-          type: 'bar',
-          data: {
-            labels: Object.keys(scoreCounts).sort((a,b)=>Number(a)-Number(b)),
-            datasets: [{ label: 'Number of Students', data: Object.keys(scoreCounts).sort((a,b)=>Number(a)-Number(b)).map(k => scoreCounts[k]), backgroundColor: '#2563eb', borderRadius: 8 }]
-          },
-          options: {
-            responsive: true,
-            plugins: { legend: { display: false } },
-            scales: { y: { beginAtZero: true, ticks: { stepSize: 1 }}}
-          }
-        });
-      }
-    }, 200);
-  });
-
-  document.getElementById('output').innerHTML = html;
-}
-</script>
-</body>
-</html>
+  dropzone.classList.remove('border-blue-500');
+  const file = e.dataTransfer.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = ev => {
